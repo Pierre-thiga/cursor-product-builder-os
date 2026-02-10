@@ -1,0 +1,5 @@
+{
+  "name": "Cursor Operating Model Visualizer",
+  "description": "An interactive dashboard visualizing the Cursor Operating Model architecture, featuring agent relationships, skill mapping, and operational flow simulations.",
+  "requestFramePermissions": []
+}
