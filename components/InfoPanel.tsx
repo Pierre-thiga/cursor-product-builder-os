@@ -12,7 +12,7 @@ export const InfoPanel: React.FC<InfoPanelProps> = ({ node, onClose }) => {
   if (!node) return null;
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ x: 300, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: 300, opacity: 0 }}
@@ -20,12 +20,12 @@ export const InfoPanel: React.FC<InfoPanelProps> = ({ node, onClose }) => {
     >
       <div className="flex justify-between items-start mb-6">
         <div>
-           <div className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-${node.color}-100 text-${node.color}-700 border border-${node.color}-200 mb-2`}>
-             {node.type}
-           </div>
-           <h2 className="text-2xl font-bold text-slate-900 tracking-tight">{node.label}</h2>
+          <div className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-${node.color}-100 text-${node.color}-700 border border-${node.color}-200 mb-2`}>
+            {node.type}
+          </div>
+          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">{node.label}</h2>
         </div>
-        <button 
+        <button
           onClick={onClose}
           className="p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors"
         >
@@ -43,7 +43,7 @@ export const InfoPanel: React.FC<InfoPanelProps> = ({ node, onClose }) => {
 
         {node.details && (
           <>
-             {node.details.mission && (
+            {node.details.mission && (
               <section className="bg-slate-50 rounded-lg p-4 border border-slate-200">
                 <div className="flex items-center gap-2 mb-2 text-indigo-600">
                   <Cpu size={16} />
@@ -55,17 +55,33 @@ export const InfoPanel: React.FC<InfoPanelProps> = ({ node, onClose }) => {
               </section>
             )}
 
-            {node.details.skillsUsed && node.details.skillsUsed.length > 0 && (
+            {node.skills && node.skills.length > 0 && (
               <section>
                 <div className="flex items-center gap-2 mb-3 text-emerald-600">
                   <Wrench size={16} />
                   <h3 className="text-sm font-semibold uppercase tracking-wider">Skills</h3>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {node.details.skillsUsed.map(skill => (
-                    <span key={skill} className="px-2 py-1 rounded bg-white border border-slate-200 text-xs font-mono text-emerald-700 shadow-sm">
-                      {skill}
-                    </span>
+                <div className="flex flex-col gap-3">
+                  {node.skills.map(skill => (
+                    <div key={skill.id} className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="font-bold text-slate-700 text-sm">{skill.label}</span>
+                        <span className="text-[10px] bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-mono border border-emerald-200">
+                          {skill.id}
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-500 mb-2">
+                        {skill.description}
+                      </p>
+                      {skill.relatedMcpId && (
+                        <div className="flex items-center gap-1.5 text-[10px] text-amber-600 font-medium">
+                          <span className="uppercase tracking-wider text-amber-500">Uses:</span>
+                          <span className="bg-amber-50 px-1.5 py-0.5 rounded border border-amber-100">
+                            {skill.relatedMcpId}
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
               </section>
@@ -73,11 +89,11 @@ export const InfoPanel: React.FC<InfoPanelProps> = ({ node, onClose }) => {
 
             {node.details.mcpUsed && node.details.mcpUsed.length > 0 && (
               <section>
-                 <div className="flex items-center gap-2 mb-3 text-amber-600">
+                <div className="flex items-center gap-2 mb-3 text-amber-600">
                   <ExternalLink size={16} />
                   <h3 className="text-sm font-semibold uppercase tracking-wider">MCP Servers</h3>
                 </div>
-                 <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2">
                   {node.details.mcpUsed.map(mcp => (
                     <span key={mcp} className="px-2 py-1 rounded bg-white border border-slate-200 text-xs font-mono text-amber-700 shadow-sm">
                       {mcp}

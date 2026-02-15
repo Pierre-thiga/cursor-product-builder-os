@@ -1,8 +1,17 @@
 export enum ComponentType {
   MAIN_AGENT = 'MAIN_AGENT',
+  SQUAD_AGENT = 'SQUAD_AGENT',
   SUB_AGENT = 'SUB_AGENT',
-  SKILL = 'SKILL',
+  SKILL = 'SKILL', // Keeping for legacy/safe typing, though unused in graph
   MCP = 'MCP'
+}
+
+export interface SkillData {
+  id: string;
+  label: string;
+  description: string;
+  iconName: string; // Key from Lucide icons
+  relatedMcpId?: string; // Optional link to an MCP
 }
 
 export interface NodeData {
@@ -19,6 +28,7 @@ export interface NodeData {
     mcpUsed?: string[];
     special?: string;
   };
+  skills?: SkillData[]; // Embedded skills
   radius?: number; // For visualization sizing
 }
 
