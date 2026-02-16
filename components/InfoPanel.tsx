@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { X, Cpu, Shield, ExternalLink, Wrench } from 'lucide-react';
+import { X, Cpu, Shield, ExternalLink, Wrench, FileText } from 'lucide-react';
 import { NodeData, ComponentType } from '../types';
+import { NODES } from '../constants';
 
 interface InfoPanelProps {
   node: NodeData | null;
@@ -10,6 +11,11 @@ interface InfoPanelProps {
 
 export const InfoPanel: React.FC<InfoPanelProps> = ({ node, onClose }) => {
   if (!node) return null;
+
+  // Resolve skills from IDs if they exist
+  const resolvedSkills = node.skills?.map(skillId =>
+    NODES.find(n => n.id === skillId)
+  ).filter(Boolean);
 
   return (
     <motion.div
@@ -41,6 +47,23 @@ export const InfoPanel: React.FC<InfoPanelProps> = ({ node, onClose }) => {
           </p>
         </section>
 
+        {/* Context Files Section */}
+        {node.contextFiles && node.contextFiles.length > 0 && (
+          <section>
+            <div className="flex items-center gap-2 mb-3 text-slate-600">
+              <FileText size={16} />
+              <h3 className="text-sm font-semibold uppercase tracking-wider">Context Files</h3>
+            </div>
+            <ul className="space-y-2">
+              {node.contextFiles.map((file, idx) => (
+                <li key={idx} className="bg-slate-50 px-3 py-2 rounded border border-slate-200 text-xs font-mono text-slate-600 break-all">
+                  {file}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
         {node.details && (
           <>
             {node.details.mission && (
@@ -52,38 +75,6 @@ export const InfoPanel: React.FC<InfoPanelProps> = ({ node, onClose }) => {
                 <p className="text-sm text-slate-700">
                   {node.details.mission}
                 </p>
-              </section>
-            )}
-
-            {node.skills && node.skills.length > 0 && (
-              <section>
-                <div className="flex items-center gap-2 mb-3 text-emerald-600">
-                  <Wrench size={16} />
-                  <h3 className="text-sm font-semibold uppercase tracking-wider">Skills</h3>
-                </div>
-                <div className="flex flex-col gap-3">
-                  {node.skills.map(skill => (
-                    <div key={skill.id} className="p-3 rounded-lg bg-slate-50 border border-slate-200">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="font-bold text-slate-700 text-sm">{skill.label}</span>
-                        <span className="text-[10px] bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-mono border border-emerald-200">
-                          {skill.id}
-                        </span>
-                      </div>
-                      <p className="text-xs text-slate-500 mb-2">
-                        {skill.description}
-                      </p>
-                      {skill.relatedMcpId && (
-                        <div className="flex items-center gap-1.5 text-[10px] text-amber-600 font-medium">
-                          <span className="uppercase tracking-wider text-amber-500">Uses:</span>
-                          <span className="bg-amber-50 px-1.5 py-0.5 rounded border border-amber-100">
-                            {skill.relatedMcpId}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
               </section>
             )}
 
@@ -115,6 +106,31 @@ export const InfoPanel: React.FC<InfoPanelProps> = ({ node, onClose }) => {
               </section>
             )}
           </>
+        )}
+
+        {/* Skills Section */}
+        {resolvedSkills && resolvedSkills.length > 0 && (
+          <section>
+            <div className="flex items-center gap-2 mb-3 text-emerald-600">
+              <Wrench size={16} />
+              <h3 className="text-sm font-semibold uppercase tracking-wider">Skills</h3>
+            </div>
+            <div className="flex flex-col gap-3">
+              {resolvedSkills.map((skill: any) => (
+                <div key={skill.id} className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="font-bold text-slate-700 text-sm">{skill.label}</span>
+                    <span className="text-[10px] bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-mono border border-emerald-200">
+                      {skill.id}
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-500 mb-2">
+                    {skill.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
         )}
       </div>
     </motion.div>

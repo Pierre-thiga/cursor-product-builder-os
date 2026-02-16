@@ -5,7 +5,9 @@ import {
   Mail, Palette, Cloud, Book, Github, Sparkles,
   FileText, Activity, Terminal, Box, CheckCircle,
   RefreshCw, Users, Send, Layout, Globe, Play, Cpu,
-  Shield, CheckCircle as Check
+  Shield, CheckCircle as Check, Wand2, ClipboardList,
+  Rocket, Calculator, Kanban, Brain, DatabaseZap,
+  ShieldCheck, FileSpreadsheet, Search, Hammer, BookOpen, Zap
 } from 'lucide-react';
 import { NodeData, ComponentType, LinkData, FlowStep } from '../types';
 import { LINKS } from '../constants';
@@ -15,7 +17,10 @@ const Icons: Record<string, React.ElementType> = {
   User, Bot, Database, Container, NotebookPen,
   Mail, Palette, Cloud, Book, Github, Sparkles,
   FileText, Terminal, Box, CheckCircle, RefreshCw,
-  Users, Send, Layout, Globe, Play, Cpu, Shield
+  Users, Send, Layout, Globe, Play, Cpu, Shield,
+  Wand2, ClipboardList, Rocket, Calculator, Kanban,
+  Brain, DatabaseZap, ShieldCheck, FileSpreadsheet,
+  Search, Hammer, BookOpen, Zap
 };
 
 // --- Props ---
@@ -27,19 +32,17 @@ interface SystemMapProps {
 }
 
 // --- Layout Configuration ---
-// Adjusted to fit 220px wide nodes within the viewport
-// --- Layout Configuration ---
 // Refactored to 4 columns: Orchestrator -> Squad -> Sub -> MCPs
 const COLUMN_CONFIG = {
   [ComponentType.MAIN_AGENT]: 0.10,
-  [ComponentType.SQUAD_AGENT]: 0.35,
+  [ComponentType.TEAM_SQUAD]: 0.35,
   [ComponentType.SUB_AGENT]: 0.60,
   [ComponentType.MCP]: 0.88
 };
 
 const COLUMN_LABELS = [
-  { label: 'ORCHESTRATOR', x: '10%' },
-  { label: 'SQUAD AGENTS', x: '35%' },
+  { label: 'Main Agent', x: '10%' },
+  { label: 'TEAM SQUADS', x: '35%' },
   { label: 'SUB AGENTS', x: '60%' },
   { label: 'MCP SERVERS', x: '88%' },
 ];
@@ -51,12 +54,15 @@ const useForceSimulation = (nodes: NodeData[], links: LinkData[], width: number,
   useEffect(() => {
     if (width === 0 || height === 0) return;
 
+    // Filter out SKILL nodes from simulation
+    const visibleNodes = nodes.filter(n => n.type !== ComponentType.SKILL);
+
     // Initial positioning setup
     const currentPos: Record<string, { x: number; y: number; vy: number }> = {};
 
     const nodesByCol: Record<number, NodeData[]> = {};
-    nodes.forEach(n => {
-      const pct = COLUMN_CONFIG[n.type] || 0.5;
+    visibleNodes.forEach(n => {
+      const pct = COLUMN_CONFIG[n.type] || 0.6;
       if (!nodesByCol[pct]) nodesByCol[pct] = [];
       nodesByCol[pct].push(n);
     });
@@ -80,13 +86,19 @@ const useForceSimulation = (nodes: NodeData[], links: LinkData[], width: number,
     // Physics constants
     const kSpring = 0.08;
     const kCenter = 0.05; // Stronger centering for columns
-    const minSpacing = 160; // Significantly increased spacing to prevent overlaps with skill lists
+    const minSpacing = 180; // Increased spacing to accommodate embedded skills
     const ids = Object.keys(currentPos);
+
+    // Filter links to only those between visible nodes
+    const visibleLinks = links.filter(l =>
+      visibleNodes.some(n => n.id === l.source) &&
+      visibleNodes.some(n => n.id === l.target)
+    );
 
     // Physics Step Logic
     const runPhysicsStep = () => {
       // Spring forces
-      links.forEach(link => {
+      visibleLinks.forEach(link => {
         const u = currentPos[link.source];
         const v = currentPos[link.target];
         if (u && v) {
@@ -104,9 +116,8 @@ const useForceSimulation = (nodes: NodeData[], links: LinkData[], width: number,
         p.vy *= 0.55;
         p.y += p.vy;
 
-        const node = nodes.find(n => n.id === id);
+        const node = visibleNodes.find(n => n.id === id);
         // Stricter X alignment: Forcefully clamp X every frame to target column
-        // Interpolate X towards target for smoother intro, or snap? Snap is safer for "perfect alignment"
         const targetPct = COLUMN_CONFIG[node?.type || ComponentType.SUB_AGENT] || 0.6;
         p.x = width * targetPct;
       });
@@ -281,6 +292,8 @@ export const SystemMap: React.FC<SystemMapProps> = ({ nodes, selectedId, onSelec
     return !isHighlighted(nodeId);
   };
 
+  const visibleNodes = nodes.filter(n => n.type !== ComponentType.SKILL);
+
   return (
     <div
       ref={containerRef}
@@ -307,6 +320,9 @@ export const SystemMap: React.FC<SystemMapProps> = ({ nodes, selectedId, onSelec
       {/* SVG Layer for Links */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
         {LINKS.map((link, i) => {
+          // Skip links involving hidden nodes (skills)
+          if (!positions[link.source] || !positions[link.target]) return null;
+
           const start = positions[link.source];
           const end = positions[link.target];
           if (!start || !end) return null;
@@ -382,7 +398,7 @@ export const SystemMap: React.FC<SystemMapProps> = ({ nodes, selectedId, onSelec
       </svg>
 
       {/* HTML Layer for Nodes (Solid White Pills) */}
-      {nodes.map(node => {
+      {visibleNodes.map(node => {
         const pos = positions[node.id];
         if (!pos) return null;
 
@@ -432,8 +448,8 @@ export const SystemMap: React.FC<SystemMapProps> = ({ nodes, selectedId, onSelec
               boxShadow: shadow
             }}
             style={{
-              minWidth: '240px',
-              maxWidth: '280px',
+              minWidth: '220px',
+              maxWidth: '260px',
             }}
             transition={{ type: 'spring', stiffness: 200, damping: 25 }}
             onClick={(e) => { e.stopPropagation(); onSelect(node.id); }}
@@ -441,7 +457,7 @@ export const SystemMap: React.FC<SystemMapProps> = ({ nodes, selectedId, onSelec
             onMouseLeave={() => setHoveredNodeId(null)}
           >
             {/* Header Section */}
-            <div className="flex items-center gap-3 p-3 pb-2">
+            <div className="flex items-center gap-2 p-2">
               <div className={`p-1.5 rounded bg-${node.color}-100 text-${node.color}-600 shrink-0`}>
                 <Icon size={18} className={isActiveInFlow ? 'animate-pulse' : ''} />
               </div>
@@ -451,29 +467,35 @@ export const SystemMap: React.FC<SystemMapProps> = ({ nodes, selectedId, onSelec
                   {node.label}
                 </span>
 
-                {node.contextFile && (
-                  <div className="flex items-center gap-1.5 px-2 py-0.5 mt-1 rounded bg-amber-50 border border-amber-200 text-amber-700 text-[10px] w-fit font-mono">
-                    <FileText size={10} className="text-amber-600 shrink-0" />
-                    <span className="truncate max-w-[140px] font-medium">{node.contextFile}</span>
-                  </div>
-                )}
+                {/* Subtitle/Type instead of context file directly in header for cleaner look, or maybe just context file if it fits */}
               </div>
             </div>
 
-            {/* Embedded Skills Section - Title Removed */}
+            {/* Context File Pill - Optional, simplified */}
+            {node.contextFile && (
+              <div className="px-1 pb-1">
+                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-slate-50 border border-slate-100 text-slate-500 text-[10px] w-full font-mono overflow-hidden">
+                  <span className="truncate">{node.contextFile}</span>
+                </div>
+              </div>
+            )}
+
+            {/* Embedded Skills Section */}
             {node.skills && node.skills.length > 0 && (
               <div className="px-3 pb-3 flex flex-col gap-1.5">
                 <div className="flex flex-wrap gap-1.5">
-                  {node.skills.map(skill => {
-                    const SkillIcon = Icons[skill.iconName] || Cpu;
+                  {node.skills.map(skillId => {
+                    const skillNode = nodes.find(n => n.id === skillId);
+                    if (!skillNode) return null;
+                    const SkillIcon = Icons[skillNode.iconName] || Cpu;
                     return (
                       <div
-                        key={skill.id}
+                        key={skillNode.id}
                         className="flex items-center gap-1.5 px-2 py-1 rounded bg-slate-50 border border-slate-200 text-slate-600 text-[10px]"
-                        title={skill.description}
+                        title={skillNode.description}
                       >
                         <SkillIcon size={10} className="text-emerald-500" />
-                        <span className="font-medium">{skill.label}</span>
+                        <span className="font-medium">{skillNode.label}</span>
                       </div>
                     );
                   })}
@@ -483,7 +505,7 @@ export const SystemMap: React.FC<SystemMapProps> = ({ nodes, selectedId, onSelec
 
             {/* Main Agent Action Button */}
             {isMainAgent && (
-              <div className="px-3 pb-3">
+              <div className="px-3 pb-3 pt-1">
                 <div className="flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded bg-indigo-50 border border-indigo-200 text-indigo-700 text-[10px] font-bold group-hover:bg-indigo-100 transition-colors w-full">
                   <Play size={10} className="fill-current" />
                   RUN SCENARIOS

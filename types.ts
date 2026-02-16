@@ -1,8 +1,8 @@
 export enum ComponentType {
   MAIN_AGENT = 'MAIN_AGENT',
-  SQUAD_AGENT = 'SQUAD_AGENT',
+  TEAM_SQUAD = 'TEAM_SQUAD',
   SUB_AGENT = 'SUB_AGENT',
-  SKILL = 'SKILL', // Keeping for legacy/safe typing, though unused in graph
+  SKILL = 'SKILL',
   MCP = 'MCP'
 }
 
@@ -10,8 +10,8 @@ export interface SkillData {
   id: string;
   label: string;
   description: string;
-  iconName: string; // Key from Lucide icons
-  relatedMcpId?: string; // Optional link to an MCP
+  iconName: string;
+  relatedMcpId?: string;
 }
 
 export interface NodeData {
@@ -22,13 +22,14 @@ export interface NodeData {
   color: string; // Tailwind class prefix or hex
   iconName: string;
   contextFile?: string; // Linked context document (.md)
+  contextFiles?: string[]; // List of context files
+  skills?: string[]; // List of skill IDs (referencing other nodes)
   details?: {
     mission?: string;
     skillsUsed?: string[];
     mcpUsed?: string[];
     special?: string;
   };
-  skills?: SkillData[]; // Embedded skills
   radius?: number; // For visualization sizing
 }
 

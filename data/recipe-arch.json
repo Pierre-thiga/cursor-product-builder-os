@@ -1,0 +1,314 @@
+{
+  "NODES": [
+    {
+      "id": "main-agent",
+      "label": "Cursor Main Agent",
+      "type": "MAIN_AGENT",
+      "description": "Architecte principal de la Scrum Team Virtuelle. Point d'entrée pour concevoir et créer de nouveaux agents orchestrateurs, subagents et skills.",
+      "color": "cyan",
+      "iconName": "Wand2",
+      "contextFile": "/docs/* + project code",
+      "skills": [],
+      "contextFiles": ["/docs/*", "project code"]
+    },
+    {
+      "id": "recipe-product-manager",
+      "label": "Product Manager",
+      "type": "TEAM_SQUAD",
+      "description": "Product Manager spécialisé pour le projet Recipe Sodexo. Analyse les Use Cases, rédige les spécifications INVEST et gère le backlog Notion.",
+      "color": "magenta",
+      "iconName": "ClipboardList",
+      "contextFile": "/docs/discovery/*",
+      "skills": [],
+      "contextFiles": ["/docs/discovery/*"]
+    },
+    {
+      "id": "cosmosdb-dba",
+      "label": "CosmosDB DBA",
+      "type": "TEAM_SQUAD",
+      "description": "Database Administrator spécialisé CosmosDB. Explore la structure, exécute des requêtes SQL, modifie les données et produit des rapports sur les 47K recettes ORUS.",
+      "color": "cyan",
+      "iconName": "Database",
+      "contextFile": "",
+      "skills": ["data-export"],
+      "contextFiles": []
+    },
+    {
+      "id": "devops-agent",
+      "label": "DevOps Agent",
+      "type": "TEAM_SQUAD",
+      "description": "Agent DevOps spécialisé. Exécute les tests pytest, crée des scripts de déploiement, conseille sur l'architecture Azure et déploie sur Container Apps.",
+      "color": "green",
+      "iconName": "Rocket",
+      "contextFile": "",
+      "skills": ["shell-best-practice"],
+      "contextFiles": []
+    },
+    {
+      "id": "secretaire",
+      "label": "Secretary",
+      "type": "TEAM_SQUAD",
+      "description": "Secrétaire spécialisé dans la communication d'équipe. Rédige des emails adaptés au destinataire, prépare des status updates et gère l'annuaire d'équipe.",
+      "color": "blue",
+      "iconName": "Mail",
+      "contextFile": "team-directory.md",
+      "skills": [],
+      "contextFiles": ["team-directory.md"]
+    },
+    {
+      "id": "streamlit-designer",
+      "label": "Streamlit Designer",
+      "type": "TEAM_SQUAD",
+      "description": "Expert Streamlit UI/UX pour le projet Recipe. Conçoit l'architecture des apps, co-construit l'interface et teste visuellement le rendu via le browser MCP.",
+      "color": "rose",
+      "iconName": "Layout",
+      "contextFile": "design-systemr.md",
+      "skills": [],
+      "contextFiles": ["design-systemr.md"]
+    },
+    {
+      "id": "notion-backlog",
+      "label": "Notion Backlog",
+      "type": "SUB_AGENT",
+      "description": "Gestionnaire de backlog Notion. CRUD des Features via le MCP Notion avec mode supervisé (validation obligatoire avant création/modification).",
+      "color": "violet",
+      "iconName": "Kanban",
+      "contextFile": ".cursor/agents/notion-backlog.md",
+      "skills": [],
+      "contextFiles": [".cursor/agents/notion-backlog.md", ".cursor/NOTION_MCP_SETUP.md"]
+    },
+    {
+      "id": "foundry-persona",
+      "label": "Foundry Persona",
+      "type": "SUB_AGENT",
+      "description": "Consultant personas synthétiques via Azure AI Foundry. Valide les hypothèses produit avec 4 profils : Chef, Nutritionniste, Manager de Site, Responsable Qualité.",
+      "color": "violet",
+      "iconName": "Brain",
+      "contextFile": ".cursor/agents/foundry-persona.md",
+      "skills": [],
+      "contextFiles": [".cursor/agents/foundry-persona.md"]
+    },
+    {
+      "id": "email-sender",
+      "label": "Email Sender",
+      "type": "SUB_AGENT",
+      "description": "Spécialiste d'envoi d'emails via l'API Power Automate. Construit les payloads HTML et exécute les appels REST. Ne jamais envoyer sans validation explicite.",
+      "color": "blue",
+      "iconName": "Send",
+      "contextFile": "email-sender.md",
+      "skills": [],
+      "contextFiles": ["email-sender.md", "docs/config/email-sender-config.md"]
+    },
+    {
+      "id": "cosmosdb-cli-wrapper",
+      "label": "CosmosDB CLI Wrapper",
+      "type": "SUB_AGENT",
+      "description": "Wrapper Azure CLI en lecture seule pour explorer la structure CosmosDB. Liste les databases, containers, partition keys et métadonnées du compte.",
+      "color": "cyan",
+      "iconName": "Terminal",
+      "contextFile": ".cursor/agents/cosmosdb-cli-wrapper.md",
+      "skills": [],
+      "contextFiles": [".cursor/agents/cosmosdb-cli-wrapper.md"]
+    },
+    {
+      "id": "azure-cli-wrapper",
+      "label": "Azure CLI Wrapper",
+      "type": "SUB_AGENT",
+      "description": "Wrapper Azure CLI en lecture seule pour l'infrastructure. Liste Container Apps, images ACR, logs, révisions et ressources du resource group.",
+      "color": "green",
+      "iconName": "Cloud",
+      "contextFile": ".cursor/agents/azure-cli-wrapper.md",
+      "skills": [],
+      "contextFiles": [".cursor/agents/azure-cli-wrapper.md"]
+    },
+    {
+      "id": "wizard-prerequisites",
+      "label": "Wizard Prerequisites",
+      "type": "SUB_AGENT",
+      "description": "Vérificateur de prérequis du wizard. Scanne les skills installés, compare avec la liste requise et produit un rapport avec commandes d'installation.",
+      "color": "slate",
+      "iconName": "ShieldCheck",
+      "contextFile": ".cursor/agents/wizard-prerequisites.md",
+      "skills": [],
+      "contextFiles": [".cursor/agents/wizard-prerequisites.md"]
+    },
+    {
+      "id": "data-export",
+      "label": "Data Export",
+      "type": "SKILL",
+      "description": "Skill d'export de données vers CSV et Excel via pandas. Génère des fichiers nommés avec timestamp dans orusRecipies/exports/.",
+      "color": "orange",
+      "iconName": "FileSpreadsheet",
+      "contextFile": ".cursor/skills/data-export/SKILL.md",
+      "contextFiles": [".cursor/skills/data-export/SKILL.md"]
+    },
+    {
+      "id": "find-skills",
+      "label": "Find Skills",
+      "type": "SKILL",
+      "description": "Skill de découverte et installation de skills depuis l'écosystème ouvert (npx skills find/add). Recherche par mot-clé et installe pour Cursor.",
+      "color": "orange",
+      "iconName": "Search",
+      "contextFile": ".cursor/skills/find-skills/SKILL.md",
+      "contextFiles": [".cursor/skills/find-skills/SKILL.md"]
+    },
+    {
+      "id": "skill-creator",
+      "label": "Skill Creator",
+      "type": "SKILL",
+      "description": "Guide méthodologique pour créer de nouveaux skills. Fournit le template SKILL.md, les scripts d'initialisation et de validation.",
+      "color": "orange",
+      "iconName": "Hammer",
+      "contextFile": ".cursor/skills/skill-creator/SKILL.md",
+      "contextFiles": [".cursor/skills/skill-creator/SKILL.md", ".cursor/skills/skill-creator/scripts/"]
+    },
+    {
+      "id": "subagent-creator",
+      "label": "Subagent Creator",
+      "type": "SKILL",
+      "description": "Guide pour créer des subagents Cursor conformes à la spécification officielle. Encode les conventions du projet (frontmatter, exemples, limites).",
+      "color": "orange",
+      "iconName": "Bot",
+      "contextFile": ".cursor/skills/subagent-creator/SKILL.md",
+      "contextFiles": [".cursor/skills/subagent-creator/SKILL.md", ".cursor/skills/subagent-creator/references/cursor-subagent-spec.md"]
+    },
+    {
+      "id": "shell-best-practice",
+      "label": "Shell Best Practice",
+      "type": "SKILL",
+      "description": "Skill de gestion des meilleures pratiques shell pour les scripts de déploiement.",
+      "color": "orange",
+      "iconName": "Users",
+      "contextFile": "",
+      "contextFiles": []
+    },
+    {
+      "id": "notion-mcp",
+      "label": "Notion MCP",
+      "type": "MCP",
+      "description": "Serveur MCP Notion pour gérer le workspace Sodexo. Opérations : search, fetch, create-pages, update-page, query-data-sources sur la base 'Pivot Use Case list'.",
+      "color": "slate",
+      "iconName": "BookOpen",
+      "contextFile": ".cursor/NOTION_MCP_SETUP.md",
+      "contextFiles": [".cursor/NOTION_MCP_SETUP.md"]
+    },
+    {
+      "id": "azure-mcp",
+      "label": "Azure MCP Server",
+      "type": "MCP",
+      "description": "Serveur MCP Azure multi-services. Expose cosmos (requêtes SQL), foundry (personas IA), deploy (plans de déploiement), bestpractices et 30+ outils Azure.",
+      "color": "slate",
+      "iconName": "Cloud",
+      "contextFile": null,
+      "contextFiles": []
+    },
+    {
+      "id": "browser-mcp",
+      "label": "Browser MCP",
+      "type": "MCP",
+      "description": "Serveur MCP cursor-ide-browser pour tester les interfaces web. Navigate, snapshot, click et interactions DOM sur les apps Streamlit locales.",
+      "color": "slate",
+      "iconName": "Globe",
+      "contextFile": null,
+      "contextFiles": []
+    },
+    {
+      "id": "power-automate",
+      "label": "Power Automate",
+      "type": "MCP",
+      "description": "API REST Power Automate (HTTP trigger) pour l'envoi d'emails. Authentification via SAS token intégré à l'URL. Payload JSON avec body HTML.",
+      "color": "slate",
+      "iconName": "Zap",
+      "contextFile": "docs/config/email-sender-config.md",
+      "contextFiles": ["docs/config/email-sender-config.md"]
+    }
+  ],
+  "LINKS": [
+    { "source": "main-agent", "target": "wizard-prerequisites" },
+    { "source": "main-agent", "target": "find-skills" },
+    { "source": "main-agent", "target": "skill-creator" },
+    { "source": "main-agent", "target": "subagent-creator" },
+    { "source": "main-agent", "target": "recipe-product-manager" },
+    { "source": "main-agent", "target": "cosmosdb-dba" },
+    { "source": "main-agent", "target": "devops-agent" },
+    { "source": "main-agent", "target": "secretaire" },
+    { "source": "main-agent", "target": "streamlit-designer" },
+
+    { "source": "recipe-product-manager", "target": "notion-backlog" },
+    { "source": "recipe-product-manager", "target": "foundry-persona" },
+
+    { "source": "cosmosdb-dba", "target": "cosmosdb-cli-wrapper" },
+    { "source": "cosmosdb-dba", "target": "data-export" },
+    { "source": "cosmosdb-dba", "target": "azure-mcp" },
+
+    { "source": "devops-agent", "target": "azure-cli-wrapper" },
+    { "source": "devops-agent", "target": "azure-mcp" },
+
+    { "source": "secretaire", "target": "email-sender" },
+
+    { "source": "streamlit-designer", "target": "browser-mcp" },
+
+    { "source": "notion-backlog", "target": "notion-mcp" },
+    { "source": "email-sender", "target": "power-automate" },
+    { "source": "cosmosdb-cli-wrapper", "target": "azure-mcp" },
+    { "source": "azure-cli-wrapper", "target": "azure-mcp" }
+  ],
+  "SCENARIOS": [
+    {
+      "id": "scenario-update-recipe-score",
+      "title": "Mettre à jour un score recette dans CosmosDB",
+      "description": "L'utilisateur veut modifier le score Toques & Sabliers d'une recette. Le DBA explore la base, présente l'état actuel, attend validation et exécute la modification.",
+      "steps": [
+        {
+          "label": "Exploration structure",
+          "from": "cosmosdb-dba",
+          "to": "cosmosdb-cli-wrapper",
+          "description": "Le DBA utilise le CLI wrapper pour lister les containers et vérifier la structure de la base recipes-db"
+        },
+        {
+          "label": "Requête état actuel",
+          "from": "cosmosdb-dba",
+          "to": "azure-mcp",
+          "description": "Exécution d'un SELECT SQL via le MCP cosmos pour récupérer l'état actuel de la recette ciblée"
+        },
+        {
+          "label": "Export rapport",
+          "from": "cosmosdb-dba",
+          "to": "data-export",
+          "description": "Optionnel : export des résultats en CSV/Excel via le skill data-export dans orusRecipies/exports/"
+        }
+      ]
+    },
+    {
+      "id": "scenario-send-status-update",
+      "title": "Envoyer un status update par email",
+      "description": "L'utilisateur demande d'envoyer un email d'avancement projet à un stakeholder. Le secrétaire identifie le contact, rédige l'email adapté, et l'envoie après validation.",
+      "steps": [
+        {
+          "label": "Rédaction email",
+          "from": "secretaire",
+          "to": "secretaire",
+          "description": "Rédaction du brouillon HTML avec structure What-Why-How, adapté au style du contact (casual/professionnel/formel)"
+        },
+        {
+          "label": "Validation utilisateur",
+          "from": "secretaire",
+          "to": "secretaire",
+          "description": "Présentation de l'aperçu email (destinataire, sujet, contenu) et attente de validation explicite (oui/non/modifier)"
+        },
+        {
+          "label": "Envoi email",
+          "from": "secretaire",
+          "to": "email-sender",
+          "description": "Le subagent email-sender lit l'endpoint Power Automate, construit le payload JSON et exécute le POST curl"
+        },
+        {
+          "label": "Appel API",
+          "from": "email-sender",
+          "to": "power-automate",
+          "description": "Appel REST POST vers le HTTP trigger Power Automate avec authentification SAS token. Confirmation du succès (HTTP 200-202)"
+        }
+      ]
+    }
+  ]
+}
