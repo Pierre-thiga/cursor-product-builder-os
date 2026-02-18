@@ -9,28 +9,38 @@
       "iconName": "Wand2",
       "contextFile": "/docs/* + project code",
       "skills": [],
-      "contextFiles": ["/docs/*", "project code"]
+      "contextFiles": [
+        "/docs/*",
+        "project code"
+      ]
     },
     {
       "id": "recipe-product-manager",
       "label": "Product Manager",
       "type": "TEAM_SQUAD",
-      "description": "Product Manager spécialisé pour le projet Recipe Sodexo. Analyse les Use Cases, rédige les spécifications INVEST et gère le backlog Notion.",
+      "description": "Product Manager spécialisé pour le projet Recipe SDX. Analyse les Use Cases, rédige les spécifications INVEST et gère le backlog Notion.",
       "color": "magenta",
       "iconName": "ClipboardList",
       "contextFile": "/docs/discovery/*",
-      "skills": [],
-      "contextFiles": ["/docs/discovery/*"]
+      "skills": [
+        "opportunity-solution-tree",
+        "invest-framework"
+      ],
+      "contextFiles": [
+        "/docs/discovery/*"
+      ]
     },
     {
       "id": "cosmosdb-dba",
       "label": "CosmosDB DBA",
       "type": "TEAM_SQUAD",
-      "description": "Database Administrator spécialisé CosmosDB. Explore la structure, exécute des requêtes SQL, modifie les données et produit des rapports sur les 47K recettes ORUS.",
+      "description": "Database Administrator spécialisé CosmosDB. Explore la structure, exécute des requêtes SQL, modifie les données et produit des rapports sur les 47K recettes SDX.",
       "color": "cyan",
       "iconName": "Database",
       "contextFile": "",
-      "skills": ["data-export"],
+      "skills": [
+        "data-export"
+      ],
       "contextFiles": []
     },
     {
@@ -41,7 +51,9 @@
       "color": "green",
       "iconName": "Rocket",
       "contextFile": "",
-      "skills": ["shell-best-practice"],
+      "skills": [
+        "shell-best-practice"
+      ],
       "contextFiles": []
     },
     {
@@ -53,7 +65,9 @@
       "iconName": "Mail",
       "contextFile": "team-directory.md",
       "skills": [],
-      "contextFiles": ["team-directory.md"]
+      "contextFiles": [
+        "team-directory.md"
+      ]
     },
     {
       "id": "streamlit-designer",
@@ -64,7 +78,9 @@
       "iconName": "Layout",
       "contextFile": "design-systemr.md",
       "skills": [],
-      "contextFiles": ["design-systemr.md"]
+      "contextFiles": [
+        "design-systemr.md"
+      ]
     },
     {
       "id": "notion-backlog",
@@ -73,9 +89,11 @@
       "description": "Gestionnaire de backlog Notion. CRUD des Features via le MCP Notion avec mode supervisé (validation obligatoire avant création/modification).",
       "color": "violet",
       "iconName": "Kanban",
-      "contextFile": ".cursor/agents/notion-backlog.md",
+      "contextFile": "backlog-structure.md",
       "skills": [],
-      "contextFiles": [".cursor/agents/notion-backlog.md", ".cursor/NOTION_MCP_SETUP.md"]
+      "contextFiles": [
+        "backlog-structure.md"
+      ]
     },
     {
       "id": "foundry-persona",
@@ -84,20 +102,9 @@
       "description": "Consultant personas synthétiques via Azure AI Foundry. Valide les hypothèses produit avec 4 profils : Chef, Nutritionniste, Manager de Site, Responsable Qualité.",
       "color": "violet",
       "iconName": "Brain",
-      "contextFile": ".cursor/agents/foundry-persona.md",
+      "contextFile": "",
       "skills": [],
-      "contextFiles": [".cursor/agents/foundry-persona.md"]
-    },
-    {
-      "id": "email-sender",
-      "label": "Email Sender",
-      "type": "SUB_AGENT",
-      "description": "Spécialiste d'envoi d'emails via l'API Power Automate. Construit les payloads HTML et exécute les appels REST. Ne jamais envoyer sans validation explicite.",
-      "color": "blue",
-      "iconName": "Send",
-      "contextFile": "email-sender.md",
-      "skills": [],
-      "contextFiles": ["email-sender.md", "docs/config/email-sender-config.md"]
+      "contextFiles": []
     },
     {
       "id": "cosmosdb-cli-wrapper",
@@ -106,9 +113,9 @@
       "description": "Wrapper Azure CLI en lecture seule pour explorer la structure CosmosDB. Liste les databases, containers, partition keys et métadonnées du compte.",
       "color": "cyan",
       "iconName": "Terminal",
-      "contextFile": ".cursor/agents/cosmosdb-cli-wrapper.md",
+      "contextFile": "",
       "skills": [],
-      "contextFiles": [".cursor/agents/cosmosdb-cli-wrapper.md"]
+      "contextFiles": []
     },
     {
       "id": "azure-cli-wrapper",
@@ -117,30 +124,34 @@
       "description": "Wrapper Azure CLI en lecture seule pour l'infrastructure. Liste Container Apps, images ACR, logs, révisions et ressources du resource group.",
       "color": "green",
       "iconName": "Cloud",
-      "contextFile": ".cursor/agents/azure-cli-wrapper.md",
+      "contextFile": "",
       "skills": [],
-      "contextFiles": [".cursor/agents/azure-cli-wrapper.md"]
+      "contextFiles": []
     },
     {
-      "id": "wizard-prerequisites",
-      "label": "Wizard Prerequisites",
+      "id": "email-sender",
+      "label": "Email Sender",
       "type": "SUB_AGENT",
-      "description": "Vérificateur de prérequis du wizard. Scanne les skills installés, compare avec la liste requise et produit un rapport avec commandes d'installation.",
-      "color": "slate",
-      "iconName": "ShieldCheck",
-      "contextFile": ".cursor/agents/wizard-prerequisites.md",
+      "description": "Spécialiste d'envoi d'emails via l'API Power Automate. Construit les payloads HTML et exécute les appels REST. Ne jamais envoyer sans validation explicite.",
+      "color": "blue",
+      "iconName": "Send",
+      "contextFile": "email-sender-config.md",
       "skills": [],
-      "contextFiles": [".cursor/agents/wizard-prerequisites.md"]
+      "contextFiles": [
+        "docs/config/email-sender-config.md"
+      ]
     },
     {
       "id": "data-export",
       "label": "Data Export",
       "type": "SKILL",
-      "description": "Skill d'export de données vers CSV et Excel via pandas. Génère des fichiers nommés avec timestamp dans orusRecipies/exports/.",
+      "description": "Skill d'export de données vers CSV et Excel via pandas. Génère des fichiers nommés avec timestamp dans sdxRecipes/exports/.",
       "color": "orange",
       "iconName": "FileSpreadsheet",
       "contextFile": ".cursor/skills/data-export/SKILL.md",
-      "contextFiles": [".cursor/skills/data-export/SKILL.md"]
+      "contextFiles": [
+        ".cursor/skills/data-export/SKILL.md"
+      ]
     },
     {
       "id": "find-skills",
@@ -150,7 +161,9 @@
       "color": "orange",
       "iconName": "Search",
       "contextFile": ".cursor/skills/find-skills/SKILL.md",
-      "contextFiles": [".cursor/skills/find-skills/SKILL.md"]
+      "contextFiles": [
+        ".cursor/skills/find-skills/SKILL.md"
+      ]
     },
     {
       "id": "skill-creator",
@@ -160,7 +173,10 @@
       "color": "orange",
       "iconName": "Hammer",
       "contextFile": ".cursor/skills/skill-creator/SKILL.md",
-      "contextFiles": [".cursor/skills/skill-creator/SKILL.md", ".cursor/skills/skill-creator/scripts/"]
+      "contextFiles": [
+        ".cursor/skills/skill-creator/SKILL.md",
+        ".cursor/skills/skill-creator/scripts/"
+      ]
     },
     {
       "id": "subagent-creator",
@@ -170,7 +186,34 @@
       "color": "orange",
       "iconName": "Bot",
       "contextFile": ".cursor/skills/subagent-creator/SKILL.md",
-      "contextFiles": [".cursor/skills/subagent-creator/SKILL.md", ".cursor/skills/subagent-creator/references/cursor-subagent-spec.md"]
+      "contextFiles": [
+        ".cursor/skills/subagent-creator/SKILL.md",
+        ".cursor/skills/subagent-creator/references/cursor-subagent-spec.md"
+      ]
+    },
+    {
+      "id": "opportunity-solution-tree",
+      "label": "Opportunity Solution Tree",
+      "type": "SKILL",
+      "description": "Skill de visualisation et structuration des opportunités produits selon la méthode de Teresa Torres. Mappe les opportunités et solutions.",
+      "color": "orange",
+      "iconName": "Kanban",
+      "contextFile": "docs/discovery/ost.md",
+      "contextFiles": [
+        "docs/discovery/ost.md"
+      ]
+    },
+    {
+      "id": "invest-framework",
+      "label": "INVEST Framework",
+      "type": "SKILL",
+      "description": "Vérifie la qualité des User Stories : Independent, Negotiable, Valuable, Estimable, Small, Testable.",
+      "color": "orange",
+      "iconName": "CheckCircle",
+      "contextFile": "docs/discovery/invest-checklist.md",
+      "contextFiles": [
+        "docs/discovery/invest-checklist.md"
+      ]
     },
     {
       "id": "shell-best-practice",
@@ -186,11 +229,11 @@
       "id": "notion-mcp",
       "label": "Notion MCP",
       "type": "MCP",
-      "description": "Serveur MCP Notion pour gérer le workspace Sodexo. Opérations : search, fetch, create-pages, update-page, query-data-sources sur la base 'Pivot Use Case list'.",
+      "description": "Serveur MCP Notion pour gérer le workspace SDX. Opérations : search, fetch, create-pages, update-page, query-data-sources sur la base 'Pivot Use Case list'.",
       "color": "slate",
       "iconName": "BookOpen",
-      "contextFile": ".cursor/NOTION_MCP_SETUP.md",
-      "contextFiles": [".cursor/NOTION_MCP_SETUP.md"]
+      "contextFile": "",
+      "contextFiles": []
     },
     {
       "id": "azure-mcp",
@@ -219,39 +262,95 @@
       "description": "API REST Power Automate (HTTP trigger) pour l'envoi d'emails. Authentification via SAS token intégré à l'URL. Payload JSON avec body HTML.",
       "color": "slate",
       "iconName": "Zap",
-      "contextFile": "docs/config/email-sender-config.md",
-      "contextFiles": ["docs/config/email-sender-config.md"]
+      "contextFile": null,
+      "contextFiles": []
     }
   ],
   "LINKS": [
-    { "source": "main-agent", "target": "wizard-prerequisites" },
-    { "source": "main-agent", "target": "find-skills" },
-    { "source": "main-agent", "target": "skill-creator" },
-    { "source": "main-agent", "target": "subagent-creator" },
-    { "source": "main-agent", "target": "recipe-product-manager" },
-    { "source": "main-agent", "target": "cosmosdb-dba" },
-    { "source": "main-agent", "target": "devops-agent" },
-    { "source": "main-agent", "target": "secretaire" },
-    { "source": "main-agent", "target": "streamlit-designer" },
-
-    { "source": "recipe-product-manager", "target": "notion-backlog" },
-    { "source": "recipe-product-manager", "target": "foundry-persona" },
-
-    { "source": "cosmosdb-dba", "target": "cosmosdb-cli-wrapper" },
-    { "source": "cosmosdb-dba", "target": "data-export" },
-    { "source": "cosmosdb-dba", "target": "azure-mcp" },
-
-    { "source": "devops-agent", "target": "azure-cli-wrapper" },
-    { "source": "devops-agent", "target": "azure-mcp" },
-
-    { "source": "secretaire", "target": "email-sender" },
-
-    { "source": "streamlit-designer", "target": "browser-mcp" },
-
-    { "source": "notion-backlog", "target": "notion-mcp" },
-    { "source": "email-sender", "target": "power-automate" },
-    { "source": "cosmosdb-cli-wrapper", "target": "azure-mcp" },
-    { "source": "azure-cli-wrapper", "target": "azure-mcp" }
+    {
+      "source": "main-agent",
+      "target": "find-skills"
+    },
+    {
+      "source": "main-agent",
+      "target": "skill-creator"
+    },
+    {
+      "source": "main-agent",
+      "target": "subagent-creator"
+    },
+    {
+      "source": "main-agent",
+      "target": "recipe-product-manager"
+    },
+    {
+      "source": "main-agent",
+      "target": "cosmosdb-dba"
+    },
+    {
+      "source": "main-agent",
+      "target": "devops-agent"
+    },
+    {
+      "source": "main-agent",
+      "target": "secretaire"
+    },
+    {
+      "source": "main-agent",
+      "target": "streamlit-designer"
+    },
+    {
+      "source": "recipe-product-manager",
+      "target": "notion-backlog"
+    },
+    {
+      "source": "recipe-product-manager",
+      "target": "foundry-persona"
+    },
+    {
+      "source": "cosmosdb-dba",
+      "target": "cosmosdb-cli-wrapper"
+    },
+    {
+      "source": "cosmosdb-dba",
+      "target": "data-export"
+    },
+    {
+      "source": "cosmosdb-dba",
+      "target": "azure-mcp"
+    },
+    {
+      "source": "devops-agent",
+      "target": "azure-cli-wrapper"
+    },
+    {
+      "source": "devops-agent",
+      "target": "azure-mcp"
+    },
+    {
+      "source": "secretaire",
+      "target": "email-sender"
+    },
+    {
+      "source": "streamlit-designer",
+      "target": "browser-mcp"
+    },
+    {
+      "source": "notion-backlog",
+      "target": "notion-mcp"
+    },
+    {
+      "source": "email-sender",
+      "target": "power-automate"
+    },
+    {
+      "source": "cosmosdb-cli-wrapper",
+      "target": "azure-mcp"
+    },
+    {
+      "source": "azure-cli-wrapper",
+      "target": "azure-mcp"
+    }
   ],
   "SCENARIOS": [
     {
@@ -275,7 +374,7 @@
           "label": "Export rapport",
           "from": "cosmosdb-dba",
           "to": "data-export",
-          "description": "Optionnel : export des résultats en CSV/Excel via le skill data-export dans orusRecipies/exports/"
+          "description": "Optionnel : export des résultats en CSV/Excel via le skill data-export dans sdxRecipes/exports/"
         }
       ]
     },
@@ -307,6 +406,157 @@
           "from": "email-sender",
           "to": "power-automate",
           "description": "Appel REST POST vers le HTTP trigger Power Automate avec authentification SAS token. Confirmation du succès (HTTP 200-202)"
+        }
+      ]
+    },
+    {
+      "id": "scenario-full-us-lifecycle",
+      "title": "Cycle de vie complet d'une User Story",
+      "description": "De l'idée initiale à l'envoi du résumé par email, en passant par le cadrage vision (Notion) et la simulation Persona (Foundry).",
+      "steps": [
+        {
+          "label": "Capture du besoin",
+          "from": "main-agent",
+          "to": "recipe-product-manager",
+          "description": "L'utilisateur exprime un besoin brut. Le Main Agent délègue le cadrage au Product Manager."
+        },
+        {
+          "label": "Fetch Vision",
+          "from": "recipe-product-manager",
+          "to": "notion-backlog",
+          "description": "Le PM demande les éléments de vision produit pour aligner l'US."
+        },
+        {
+          "label": "Accès Notion Vision",
+          "from": "notion-backlog",
+          "to": "notion-mcp",
+          "description": "Lecture des documents stratégiques sur Notion via le MCP."
+        },
+        {
+          "label": "Retour Vision",
+          "from": "notion-mcp",
+          "to": "notion-backlog",
+          "description": "Transmission des données de vision au subagent."
+        },
+        {
+          "label": "Synthèse Vision",
+          "from": "notion-backlog",
+          "to": "recipe-product-manager",
+          "description": "Le PM reçoit les éléments et prépare le cadrage."
+        },
+        {
+          "label": "Validation Cadrage",
+          "from": "recipe-product-manager",
+          "to": "main-agent",
+          "description": "Le PM présente le cadrage au Main Agent pour échange avec l'utilisateur."
+        },
+        {
+          "label": "Simulation Persona",
+          "from": "main-agent",
+          "to": "recipe-product-manager",
+          "description": "Après validation, le Main Agent demande de tester l'US face aux personas."
+        },
+        {
+          "label": "Appel Subagent Persona",
+          "from": "recipe-product-manager",
+          "to": "foundry-persona",
+          "description": "Le PM sollicite l'expert persona pour une simulation."
+        },
+        {
+          "label": "Inference Azure Foundry",
+          "from": "foundry-persona",
+          "to": "azure-mcp",
+          "description": "Appel au service Azure Foundry pour générer les feedbacks des personas synthétiques."
+        },
+        {
+          "label": "Collecte feedbacks",
+          "from": "azure-mcp",
+          "to": "foundry-persona",
+          "description": "Retour des critiques et suggestions des personas (Chef, Manager, etc.)."
+        },
+        {
+          "label": "Insights Personas",
+          "from": "foundry-persona",
+          "to": "recipe-product-manager",
+          "description": "Transmission des insights au PM pour affinement de l'US."
+        },
+        {
+          "label": "US Raffinée",
+          "from": "recipe-product-manager",
+          "to": "main-agent",
+          "description": "Le PM livre la version finale et raffinée de l'User Story."
+        },
+        {
+          "label": "Ordre de Création",
+          "from": "main-agent",
+          "to": "recipe-product-manager",
+          "description": "Le Main Agent valide la création finale dans le backlog."
+        },
+        {
+          "label": "Écriture Backlog",
+          "from": "recipe-product-manager",
+          "to": "notion-backlog",
+          "description": "Le PM délègue l'écriture formelle au subagent Notion."
+        },
+        {
+          "label": "Appel MCP Notion",
+          "from": "notion-backlog",
+          "to": "notion-mcp",
+          "description": "Création de la page US dans la base de données Notion."
+        },
+        {
+          "label": "Confirmation Notion",
+          "from": "notion-mcp",
+          "to": "notion-backlog",
+          "description": "Le MCP confirme la création de l'item."
+        },
+        {
+          "label": "Succès Backlog",
+          "from": "notion-backlog",
+          "to": "recipe-product-manager",
+          "description": "Le subagent confirme au PM que l'US est archivée."
+        },
+        {
+          "label": "Rapport de fin",
+          "from": "recipe-product-manager",
+          "to": "main-agent",
+          "description": "Le PM confirme la mise à jour du backlog au Main Agent."
+        },
+        {
+          "label": "Demande de notification",
+          "from": "main-agent",
+          "to": "secretaire",
+          "description": "Le Main Agent demande au Secrétaire d'envoyer le résumé de l'US."
+        },
+        {
+          "label": "Préparation Email",
+          "from": "secretaire",
+          "to": "email-sender",
+          "description": "Le Secrétaire délègue l'envoi technique au subagent Mail."
+        },
+        {
+          "label": "Payload Power Automate",
+          "from": "email-sender",
+          "to": "power-automate",
+          "description": "Envoi du payload JSON à l'API de notification."
+        },
+        {
+          "label": "Confirmation Envoi",
+          "from": "power-automate",
+          "to": "email-sender",
+          "description": "Confirmation de la réception du mail par l'API."
+        },
+        {
+          "label": "Status Mail OK",
+          "from": "email-sender",
+          "to": "secretaire",
+          "description": "Le subagent confirme le succès de l'envoi."
+        },
+        {
+          "label": "Processus Terminé",
+          "from": "secretaire",
+          "to": "main-agent",
+          "description": "Le Secrétaire confirme la clôture du workflow de communication."
         }
       ]
     }
